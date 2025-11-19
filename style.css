@@ -145,6 +145,21 @@
             border: 3px solid var(--primary-red); box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
+            /* --- PRECIOS (NUEVO) --- */
+        .price-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 10;
+            border: 2px solid var(--white);
+        }
         .gallery { padding: 80px 5%; max-width: 1200px; margin: 0 auto; background-color: var(--bg-snow); }
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
         .gallery-item { position: relative; overflow: hidden; border-radius: 15px; height: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -208,3 +223,4 @@
             
             .gallery-item { height: 250px; } /* Imágenes de galería un poco más bajas */
         }
+
