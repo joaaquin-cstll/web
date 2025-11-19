@@ -165,16 +165,46 @@
         footer { background-color: var(--primary-red); color: var(--white); padding: 3rem 5%; text-align: center; }
         .footer-decor { font-size: 2rem; margin-bottom: 1rem; font-family: 'Great Vibes', cursive; }
 
+        /* --- MEDIA QUERIES (TABLET Y MÓVIL) --- */
+        
+        /* Tablet (Hasta 960px) */
+        @media (max-width: 960px) {
+            .hero { 
+                flex-direction: column-reverse; /* Texto abajo, imagen arriba si falta espacio */
+                text-align: center; 
+                padding-top: 120px; 
+                gap: 3rem;
+            }
+            
+            .hero-text p { margin: 0 auto 2rem; }
+            
+            .carousel-container {
+                height: 400px; /* Altura ajustada para tablet */
+                max-width: 500px; /* Ancho máximo controlado */
+            }
+        }
+
+        /* Móvil (Hasta 768px) */
         @media (max-width: 768px) {
             .nav-links {
-                display: none; flex-direction: column; position: absolute; top: 70px; right: 0;
+                display: none; flex-direction: column; position: absolute; top: 65px; right: 0;
                 background: var(--white); width: 100%; text-align: center; padding: 2rem 0;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1); border-top: 1px solid #eee;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-top: 1px solid #eee;
+                z-index: 999;
             }
             .nav-links.active { display: flex; }
             .hamburger { display: block; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .hero { flex-direction: column-reverse; text-align: center; padding-top: 120px; gap: 2rem; }
-            .hero-text p { margin: 0 auto 2rem; }
-            .carousel-container { height: 300px; } /* Más pequeño en móviles */
+
+            .hero-text h1 { font-size: 2.2rem; } /* Texto más pequeño para que quepa */
+            .section-title { font-size: 2.2rem; }
+
+            .carousel-container {
+                height: 300px; /* Altura ideal para móvil */
+                max-width: 100%; /* Usa todo el ancho disponible */
+            }
+
+            /* Ajustes en contacto para que no se vea apretado */
+            .contact-form { padding: 1.5rem; }
+            
+            .gallery-item { height: 250px; } /* Imágenes de galería un poco más bajas */
         }
