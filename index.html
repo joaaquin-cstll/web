@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueces de Chocolate</title>
+    <!-- Importamos fuentes de Google Fonts: Poppins (textos) y Great Vibes (títulos navideños) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Css -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-gifts"></i> 
+                Nueces<span style="color: var(--primary-green);">D'Chocolate</span>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sabores">Sabores</a></li>
+                <li><a href="#regalos">Cajas</a></li>
+                <li><a href="#pedido">Hacer Pedido</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section con Carrusel --><section class="hero" id="inicio">
+        <div class="hero-text">
+            <h2 class="christmas-font" style="font-size: 2.5rem; margin-bottom: -10px;">Edición Limitada</h2>
+            <h1>El Regalo Perfecto:<br><span class="highlight">Nueces con Chocolate</span></h1>
+            <p>Esta Navidad, regala un momento de felicidad. Nueces seleccionadas bañadas en el mejor chocolate artesanal. Crujientes, dulces y listas para compartir.</p>
+            <a href="#pedido" class="btn"><i class="fas fa-shopping-cart"></i> Pedir Ahora</a>
+        </div>
+        <div class="hero-image">
+            <!-- Carrusel de Imágenes -->
+            <div class="carousel-container" id="heroCarousel">
+                <!-- Imagen 1: Nueces Navideñas (Rojo) -->
+                <img src="img/img13.jpg" class="carousel-slide active" alt="Feliz Navidad">
+                <!-- Imagen 2: Regalo Perfecto (Verde) -->
+                <img src="img/img11.jpg" class="carousel-slide" alt="Regalo Perfecto">
+                <!-- Imagen 3: Sabor Artesanal (Dorado) -->
+                <img src="img/img14.jpg" class="carousel-slide" alt="Sabor Artesanal">
+            </div>
+        </div>
+    </section>
+
+     <!-- Features / Sabores --><section class="features" id="sabores">
+        <h2 class="section-title christmas-font">Nuestra Selección Festiva</h2>
+        <p class="section-subtitle">Elaboradas a mano con cariño.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <!-- Imagen para Chocolate Negro --><img src="img/negro.png" alt="Chocolate Negro 70%" class="feature-icon-img">
+                <h3>Chocolate Negro</h3>
+                <p>Para los amantes del cacao intenso.</p>
+            </div>
+            <div class="feature-card">
+                <!-- Imagen para Chocolate Blanco --><img src="img/blanco.png" alt="Chocolate Blanco y Canela" class="feature-icon-img">
+                <h3>Chocolate Blanco</h3>
+                <p>El sabor de la Navidad. Cremoso chocolate blanco.</p>
+            </div>
+            <div class="feature-card">
+                <!-- Imagen para Chocolate con Leche --><img src="img/leche.png" alt="Chocolate con Leche" class="feature-icon-img">
+                <h3>Chocolate con Leche</h3>
+                <p>El clásico irresistible. Chocolate con leche suave que se derrite en la boca, ideal para toda la familia.</p>
+            </div>
+        </div>
+    </section>
+
+     <!-- Galería / Cajas Regalo -->
+    <section class="gallery" id="regalos">
+        <h2 class="section-title christmas-font" style="text-align: center; color: var(--primary-red);">Regálate un Capricho</h2>
+        <p class="section-subtitle">Detalles que enamoran a simple vista</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <!-- Usamos la imagen de Chocolate Negro (ID 0) como ejemplo de caja individual -->
+                <img src="img/400g.png" alt="Caja 400g">
+                <div class="gallery-caption">
+                    <h3>Caja 400g</h3> <!-- Corregido el typo de kg a g -->
+                    <p>Elije tu sabor favorito.(400g)</p> 
+                </div>
+            </div>
+            <div class="gallery-item">
+                <!-- NUEVA IMAGEN GENERADA: Caja Mixta (ID 12) -->
+                <img src="img/Sabor Mixto.png" alt="Caja Mixta">
+                <div class="gallery-caption">
+                    <h3>Caja Mixta</h3>
+                    <p>Nueces de muchas variedades de chocolates.(400g)</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <!-- Usamos la imagen de Chocolate con Leche (ID 2) para el pack por ahora -->
+                <img src="img/pack-sabores.png" alt="Pack de Sabores">
+                <div class="gallery-caption">
+                    <h3>Pack de Sabores</h3>
+                    <p>Perfectas para golosos.(x2/400g)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pedido / Contacto -->
+     <section class="contact" id="pedido">
+        <h2 class="section-title christmas-font">Realiza tu Pedido</h2>
+        <p class="section-subtitle">Contáctanos directamente para una atención personalizada.</p>
+        
+        <div class="contact-form" style="text-align: center;">
+            <div style="margin-bottom: 2rem;">
+                <i class="fab fa-whatsapp" style="font-size: 4rem; color: #25D366; margin-bottom: 1rem;"></i>
+                <h3>¡Hablemos por WhatsApp!</h3>
+                <p style="color: var(--text-light);">Haz tu pedido rápidamente y disfruta.</p>
+            </div>
+
+            <!-- Botón de WhatsApp -->
+            <a href="https://wa.me/34643211005" target="_blank" class="btn" style="background-color: #25D366; width: 100%; margin-bottom: 1.5rem; display: inline-flex; justify-content: center; align-items: center; gap: 10px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);">
+                <i class="fab fa-whatsapp"></i> Enviar WhatsApp
+            </a>
+
+            <div style="margin: 2rem 0; border-top: 1px solid #eee; position: relative;">
+                <span style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--white); padding: 0 15px; color: #999; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">O llámanos</span>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <a href="tel:+34600000000" style="font-size: 1.8rem; font-weight: 700; color: var(--text-dark); display: flex; align-items: center; justify-content: center; gap: 10px; transition: var(--transition);">
+                    <i class="fas fa-phone-alt" style="color: var(--primary-red);"></i> 643 211 005
+                </a>
+                <p style="margin-top: 0.5rem; color: var(--text-light);">Horario: Lunes a Viernes de 9:00 a 20:00</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-decor">¡Felices Fiestas!</div>
+        <p>&copy; 2024 Nueces D'Chocolate. Hecho con amor y chocolate.</p>
+        </div>
+    </footer>
+        </div>
+    </div>
+
+     <!-- SCRIPT CORREGIDO Y BLINDADO -->
+    <script>
+        // Menú Hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+        document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { navLinks.classList.remove('active'); }); });
+
+        // --- LÓGICA DEL CARRUSEL ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const carouselImages = document.querySelectorAll('.carousel-container img');
+            
+            if (carouselImages.length > 0) {
+                // AUTO-REPARACIÓN: Asegurar que la primera imagen tiene la clase 'active'
+                let hasActive = false;
+                carouselImages.forEach(img => {
+                    if (img.classList.contains('active')) hasActive = true;
+                });
+                
+                if (!hasActive) {
+                    // Si ninguna la tiene (porque se borró al poner fotos propias), se la ponemos a la primera
+                    carouselImages[0].classList.add('active');
+                }
+
+                // Iniciar rotación
+                let currentSlide = 0;
+                // Buscar cuál es la activa actual para empezar desde ahí
+                carouselImages.forEach((img, index) => {
+                    if (img.classList.contains('active')) currentSlide = index;
+                });
+
+                setInterval(() => {
+                    // Quitar active de la actual
+                    carouselImages[currentSlide].classList.remove('active');
+                    
+                    // Calcular siguiente
+                    currentSlide = (currentSlide + 1) % carouselImages.length;
+                    
+                    // Poner active a la siguiente
+                    carouselImages[currentSlide].classList.add('active');
+                }, 3000); // Cambia cada 3 segundos
+            }
+        });
+    </script>
+</body>
+</html>
