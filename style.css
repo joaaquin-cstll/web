@@ -5,45 +5,130 @@ body {
     padding: 0;
     background-color: #f9f9f9;
     color: #333;
-    overflow-x: hidden; /* Evita desplazamiento horizontal indeseado en móviles */
+    overflow-x: hidden;
 }
 
-/* --- Cabecera (Header) --- */
-header {
+ul { list-style: none; padding: 0; margin: 0; }
+a { text-decoration: none; color: inherit; }
+
+/* --- Top Bar --- */
+.top-bar {
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* --- Cabecera Principal --- */
+.main-header {
     background-color: #fff;
     padding: 15px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .site-logo {
-    max-height: 80px;
+    max-height: 70px;
     width: auto;
     display: block;
 }
 
-/* Navegación */
-nav a {
-    text-decoration: none;
-    color: #333;
-    margin-left: 20px;
-    font-weight: 600;
+/* Buscador */
+.search-bar {
+    display: flex;
+    flex-grow: 1;
+    max-width: 400px; /* Un poco más pequeño para dar espacio al botón */
+    margin: 0 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #eee;
+    border-right: none;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+}
+
+.search-bar button {
+    background-color: #003366;
+    border: 2px solid #003366;
+    color: white;
+    padding: 0 15px;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+}
+
+/* NUEVO: Botón WhatsApp en Cabecera */
+.btn-whatsapp-header {
+    background-color: #25D366; /* Verde WhatsApp */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s;
+    white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+    box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
+}
+
+.btn-whatsapp-header:hover {
+    background-color: #128C7E;
+    transform: translateY(-2px);
+}
+
+/* --- Menú de Navegación --- */
+.main-nav {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.menu-list {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.menu-link {
+    display: block;
+    padding: 15px 0;
+    font-weight: 700;
     font-size: 14px;
     text-transform: uppercase;
     transition: color 0.3s;
 }
 
-nav a:hover {
-    color: #0055AA;
-}
+.menu-link:hover { color: #003366; }
+.menu-link.active { color: #003366; border-bottom: 3px solid #FFD700; }
+.menu-link.highlight { color: #FF4500; }
 
-.nav-offer {
-    color: #FF4500 !important;
+/* Desplegable */
+.dropdown { position: relative; cursor: pointer; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    top: 100%;
+    left: 0;
+    border-top: 3px solid #FFD700;
 }
+.dropdown-content a { color: black; padding: 12px 16px; display: block; font-size: 13px; text-transform: uppercase; }
+.dropdown-content a:hover { background-color: #f1f1f1; }
+.dropdown:hover .dropdown-content { display: block; }
 
-/* --- Sección HERO (Principal) --- */
+/* --- HERO --- */
 .hero {
     background: linear-gradient(135deg, #003366 0%, #0055AA 100%);
     color: white;
@@ -54,23 +139,9 @@ nav a:hover {
     overflow: hidden;
 }
 
-.hero-text {
-    max-width: 50%;
-}
-
-h1 {
-    font-size: 56px;
-    line-height: 1.1;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    font-style: italic;
-}
-
-p.sub-hero {
-    font-size: 18px;
-    margin-bottom: 30px;
-    color: #e0e0e0;
-}
+.hero-text { max-width: 50%; }
+h1 { font-size: 56px; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; font-style: italic; }
+p.sub-hero { font-size: 18px; margin-bottom: 30px; color: #e0e0e0; }
 
 .btn-cta {
     background-color: #FFD700;
@@ -81,146 +152,77 @@ p.sub-hero {
     border-radius: 50px;
     text-transform: uppercase;
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-    transition: transform 0.2s, background-color 0.2s;
     display: inline-block;
+    transition: transform 0.2s;
 }
-
-.btn-cta:hover {
-    transform: scale(1.05);
-    background-color: #ffcc00;
-}
+.btn-cta:hover { transform: scale(1.05); }
 
 .hero-image-placeholder {
-    width: 400px;
-    height: 400px;
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 50%;
+    width: 400px; height: 400px; background-color: rgba(255,255,255,0.1);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    border: 4px solid #FFD700; flex-shrink: 0;
+}
+
+/* --- Productos --- */
+.products { padding: 60px 50px; text-align: center; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+.card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+.card:hover { transform: translateY(-10px); }
+.card-image { height: 150px; background: #eee; border-radius: 10px; margin-bottom: 15px; }
+.card h3 { margin: 10px 0; font-size: 18px; }
+.price { font-size: 18px; color: #0055AA; font-weight: bold; display: block; margin-bottom: 15px;}
+
+/* Botón pequeño en cada producto */
+.btn-card {
+    background-color: #25D366;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+}
+.btn-card:hover { background-color: #128C7E; }
+
+
+/* --- BOTÓN FLOTANTE WHATSAPP (Bottom Right) --- */
+.float-whatsapp {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 35px; /* Tamaño del icono */
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 4px solid #FFD700;
-    font-weight: bold;
-    font-size: 24px;
-    flex-shrink: 0; /* Evita que el círculo se aplaste */
+    transition: transform 0.3s;
 }
 
-/* --- Sección de Productos --- */
-.products {
-    padding: 60px 50px;
-    text-align: center;
+.float-whatsapp:hover {
+    transform: scale(1.1);
+    background-color: #128C7E;
 }
 
-.products h2 {
-    font-size: 32px;
-    font-style: italic;
-    color: #111;
-    text-transform: uppercase;
-}
-
-/* El Grid ya es responsive gracias a 'auto-fit', pero ajustaremos los márgenes */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: 0.3s;
-    border-bottom: 4px solid transparent;
-    cursor: pointer;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    border-bottom: 4px solid #FF4500;
-}
-
-.card-image {
-    height: 150px;
-    background: #eee;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.card h3 {
-    margin: 15px 0 5px 0;
-    font-size: 18px;
-}
-
-.price {
-    font-size: 18px;
-    color: #0055AA;
-    font-weight: bold;
-}
-
-/* ========================================= */
-/* --- RESPONSIVE (Móviles y Tablets) --- */
-/* ========================================= */
-
+/* --- RESPONSIVE --- */
 @media (max-width: 900px) {
-    /* Tablet y pantallas medianas */
-    h1 { font-size: 42px; }
+    .main-header { flex-direction: column; text-align: center; }
+    .search-bar { width: 100%; margin: 15px 0; }
+    .main-nav { overflow-x: auto; padding: 0 20px;}
+    .menu-list { justify-content: flex-start; gap: 20px; }
     
-    .hero {
-        padding: 50px 30px;
-    }
+    .hero { flex-direction: column; text-align: center; padding: 50px 20px; }
+    .hero-text { max-width: 100%; margin-bottom: 40px; }
+    h1 { font-size: 38px; }
+    .hero-image-placeholder { width: 280px; height: 280px; }
     
-    .hero-image-placeholder {
-        width: 300px;
-        height: 300px;
-    }
-}
-
-@media (max-width: 768px) {
-    /* Móviles grandes y Tablets en vertical */
-    
-    /* 1. Cambiamos la cabecera para que sea vertical */
-    header {
-        flex-direction: column;
-        padding: 15px 20px;
-    }
-
-    nav {
-        margin-top: 20px;
-        display: flex;
-        flex-wrap: wrap; /* Permite que los enlaces bajen si no caben */
-        justify-content: center;
-        gap: 15px; /* Espacio entre enlaces */
-    }
-
-    nav a {
-        margin-left: 0; /* Quitamos el margen izquierdo fijo */
-        font-size: 13px;
-    }
-
-    /* 2. Cambiamos el Hero para que se apile (Texto arriba, imagen abajo) */
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 40px 20px;
-    }
-
-    .hero-text {
-        max-width: 100%;
-        margin-bottom: 40px;
-    }
-
-    h1 {
-        font-size: 36px; /* Letra más pequeña para móvil */
-    }
-
-    .hero-image-placeholder {
-        width: 250px; /* Círculo más pequeño */
-        height: 250px;
-    }
-
-    /* 3. Ajustes generales */
-    .products {
-        padding: 40px 20px;
-    }
+    /* El botón de WhatsApp de cabecera en móvil lo hacemos ancho completo para que sea fácil de tocar */
+    .header-contact { width: 100%; }
+    .btn-whatsapp-header { display: block; width: 100%; box-sizing: border-box; }
 }
