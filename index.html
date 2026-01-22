@@ -17,14 +17,12 @@
 
     <header class="main-header">
         <a href="#" class="logo-container">
-            <img src="img/Logo.jpeg" alt="Logo ZAPAS.HOP" class="site-logo" onerror="this.src='https://placehold.co/150x60?text=ZAPAS.HOP'">
+            <img src="img/Logo.jpeg" alt="Logo ZAPAS.HOP" class="site-logo" onerror="this.src='https://placehold.co/150x50/000/fff?text=ZAPAS.HOP'">
         </a>
-
         <div class="search-bar">
-            <input type="text" placeholder="Busca: Jordan, Dunk, Yeezy...">
-            <button>🔍</button>
+            <input type="text" id="searchInput" placeholder="Busca: Jordan, Dunk, Yeezy...">
+            <button onclick="filterProducts()">🔍</button>
         </div>
-
         <div class="header-contact">
             <a href="https://wa.me/644922976" target="_blank" class="btn-whatsapp-header">
                 📱 Pedir por WhatsApp
@@ -35,28 +33,23 @@
     <nav class="main-nav">
         <ul class="menu-list">
             <li><a href="#" class="menu-link active">NOVEDADES</a></li>
-            
+            <li><a href="#catalogo" class="menu-link">CATÁLOGO</a></li> 
             <li class="dropdown">
                 <a href="#" class="menu-link">MARCAS ▾</a>
                 <div class="dropdown-content mega-menu">
                     <div class="brand-column">
                         <h4>🔥 TOP TIER</h4>
-                        <a href="#">Nike Sportswear</a>
-                        <a href="#">Adidas Originals</a>
-                        <a href="#">New Balance</a>
-                        <a href="#">Puma Select</a>
+                        <a href="#catalogo" onclick="quickFilter('nike')">Nike Sportswear</a>
+                        <a href="#catalogo" onclick="quickFilter('adidas')">Adidas Originals</a>
+                        <a href="#catalogo" onclick="quickFilter('nb')">New Balance</a>
                     </div>
-
                     <div class="brand-column">
                         <h4>💎 HYPE & EXCLUSIVE</h4>
-                        <a href="#">Air Jordan</a>
-                        <a href="#">Yeezy</a>
-                        <a href="#">Off-White</a>
-                        <a href="#">Travis Scott x Nike</a>
+                        <a href="#catalogo" onclick="quickFilter('jordan')">Air Jordan</a>
+                        <a href="#catalogo" onclick="quickFilter('yeezy')">Yeezy</a>
                     </div>
                 </div>
             </li>
-
             <li><a href="#" class="menu-link highlight">OUTLET %</a></li>
         </ul>
     </nav>
@@ -64,65 +57,245 @@
     <section class="hero">
         <div class="hero-text">
             <h1>El flow empieza<br><em>por los pies</em></h1>
-            <p class="sub-hero">Catálogo exclusivo de Sneakers y Streetwear. Escríbenos para reservar tu par antes del Sold Out.</p>
-            <a href="https://wa.me/644922976" target="_blank" class="btn-cta">VER CATÁLOGO 🔥</a>
+            <p class="sub-hero">Catálogo exclusivo de Sneakers. Filtra por talla, precio y marca.</p>
+            <a href="#catalogo" class="btn-cta">VER CATÁLOGO 🔥</a>
         </div>
         <div class="hero-image-container">
             <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&q=80&w=600" alt="Zapatillas Streetwear">
         </div>
     </section>
 
-    <section class="products">
-        <h2 class="section-title">ÚLTIMOS DROPS</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="card-image-wrapper">
-                    <img src="https://placehold.co/300x300/eee/333?text=Air+Runner" alt="Air Street Runner">
-                    <span class="badge">NUEVO</span>
-                </div>
-                <div class="card-info">
-                    <h3>Air Street Runner</h3>
-                    <p class="model-ref">Ref: NK-2024</p>
-                    <div class="card-bottom">
-                        <p class="price">89,99€</p>
-                        <a href="https://wa.me/644922976?text=Me%20interesa%20Air%20Street" class="btn-card">Pedir 💬</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-image-wrapper">
-                     <img src="https://placehold.co/300x300/eee/333?text=Urban+High" alt="Urban High Top">
-                </div>
-                <div class="card-info">
-                    <h3>Urban High Top</h3>
-                    <p class="model-ref">Ref: AD-Top</p>
-                    <div class="card-bottom">
-                        <p class="price">120,00€</p>
-                        <a href="https://wa.me/644922976?text=Me%20interesa%20Urban%20High" class="btn-card">Pedir 💬</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-image-wrapper">
-                     <img src="https://placehold.co/300x300/eee/333?text=Retro+Red" alt="Classic Retro Red">
-                     <span class="badge sale">-20%</span>
-                </div>
-                <div class="card-info">
-                    <h3>Classic Retro Red</h3>
-                    <p class="model-ref">Ref: JB-Red</p>
-                    <div class="card-bottom">
-                        <p class="price"><span class="old-price">95€</span> 75,50€</p>
-                        <a href="https://wa.me/644922976?text=Me%20interesa%20Classic%20Retro" class="btn-card">Pedir 💬</a>
-                    </div>
-                </div>
-            </div>
+    <section id="catalogo" class="catalog-section">
+        <div class="catalog-header">
+            <h2 class="section-title">TODO EL STOCK</h2>
+            <p class="results-count" id="resultCount">Mostrando todos los productos</p>
         </div>
-    </section>
 
-    <a href="https://wa.me/644922976" class="float-whatsapp" target="_blank" aria-label="Chat en WhatsApp">
-        💬
-    </a>
+        <div class="catalog-container">
+            
+            <aside class="filters-sidebar">
+                <div class="filter-group">
+                    <h4>Colección / Marca</h4>
+                    <label><input type="checkbox" class="filter-category" value="jordan"> Jordan Brand</label>
+                    <label><input type="checkbox" class="filter-category" value="dunk"> Nike Dunk</label>
+                    <label><input type="checkbox" class="filter-category" value="yeezy"> Yeezy</label>
+                    <label><input type="checkbox" class="filter-category" value="adidas"> Adidas</label>
+                    <label><input type="checkbox" class="filter-category" value="nb"> New Balance</label>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Talla (EU)</h4>
+                    <div class="size-grid" id="sizeContainer">
+                        <button class="size-btn" onclick="toggleSize(this, '38')">38</button>
+                        <button class="size-btn" onclick="toggleSize(this, '39')">39</button>
+                        <button class="size-btn" onclick="toggleSize(this, '40')">40</button>
+                        <button class="size-btn" onclick="toggleSize(this, '41')">41</button>
+                        <button class="size-btn" onclick="toggleSize(this, '42')">42</button>
+                        <button class="size-btn" onclick="toggleSize(this, '43')">43</button>
+                        <button class="size-btn" onclick="toggleSize(this, '44')">44</button>
+                        <button class="size-btn" onclick="toggleSize(this, '45')">45</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Precio Máximo: <span id="priceValue">300€</span></h4>
+                    <input type="range" min="50" max="300" value="300" class="price-slider" id="priceRange" oninput="updatePriceLabel()">
+                </div>
+                
+                <button onclick="clearFilters()" style="width:100%; padding:10px; background:#ddd; border:none; cursor:pointer;">Borrar Filtros</button>
+            </aside>
+
+            <div class="catalog-grid" id="productsGrid">
+                
+                <div class="card product-item" data-category="dunk nike" data-price="110" data-sizes="39,40,41,42,43">
+                    <div class="card-image-wrapper">
+                        <img src="https://placehold.co/300x300/eee/333?text=Dunk+Panda" alt="Nike Dunk Panda">
+                    </div>
+                    <div class="card-info">
+                        <h3>Nike Dunk Low Panda</h3>
+                        <p class="model-ref">Ref: NK-Low</p>
+                        <div class="card-bottom">
+                            <p class="price">110,00€</p>
+                            <a href="https://wa.me/644922976?text=Interesado en Dunk Panda" class="btn-card">Pedir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card product-item" data-category="yeezy adidas" data-price="240" data-sizes="40,41,42,44,45">
+                    <div class="card-image-wrapper">
+                        <img src="https://placehold.co/300x300/eee/333?text=Yeezy+700" alt="Yeezy 700">
+                    </div>
+                    <div class="card-info">
+                        <h3>Yeezy Boost 700</h3>
+                        <p class="model-ref">Ref: YZ-700</p>
+                        <div class="card-bottom">
+                            <p class="price">240,00€</p>
+                            <a href="https://wa.me/644922976?text=Interesado en Yeezy 700" class="btn-card">Pedir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card product-item" data-category="nb" data-price="130" data-sizes="38,39,40,41">
+                    <div class="card-image-wrapper">
+                        <img src="https://placehold.co/300x300/eee/333?text=NB+550" alt="New Balance 550">
+                    </div>
+                    <div class="card-info">
+                        <h3>New Balance 550</h3>
+                        <p class="model-ref">Ref: NB-550</p>
+                        <div class="card-bottom">
+                            <p class="price">130,00€</p>
+                            <a href="https://wa.me/644922976?text=Interesado en NB 550" class="btn-card">Pedir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card product-item" data-category="jordan nike" data-price="280" data-sizes="42,43,44,45">
+                    <div class="card-image-wrapper">
+                        <img src="https://placehold.co/300x300/eee/333?text=J4+Military" alt="Jordan 4">
+                        <span class="badge">HOT</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>Jordan 4 Military Black</h3>
+                        <p class="model-ref">Ref: JB-4BLK</p>
+                        <div class="card-bottom">
+                            <p class="price">280,00€</p>
+                            <a href="https://wa.me/644922976?text=Interesado en Jordan 4" class="btn-card">Pedir</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card product-item" data-category="adidas" data-price="99" data-sizes="38,39,40,41,42,43">
+                    <div class="card-image-wrapper">
+                        <img src="https://placehold.co/300x300/eee/333?text=Forum+Low" alt="Adidas Forum">
+                    </div>
+                    <div class="card-info">
+                        <h3>Adidas Forum Low</h3>
+                        <p class="model-ref">Ref: AD-FOR</p>
+                        <div class="card-bottom">
+                            <p class="price">99,99€</p>
+                            <a href="https://wa.me/644922976?text=Interesado en Adidas Forum" class="btn-card">Pedir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card product-item" data-category="jordan nike" data-price="180" data-sizes="40,41,42,43">
+                    <div class="card-image-wrapper">
+                        <img src="https://placehold.co/300x300/eee/333?text=Jordan+1" alt="Jordan 1 High">
+                    </div>
+                    <div class="card-info">
+                        <h3>Jordan 1 High Chicago</h3>
+                        <p class="model-ref">Ref: JB-CHI</p>
+                        <div class="card-bottom">
+                            <p class="price">180,00€</p>
+                            <a href="https://wa.me/644922976?text=Interesado en Jordan 1" class="btn-card">Pedir</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div> </div> </section>
+
+    <a href="https://wa.me/644922976" class="float-whatsapp" target="_blank">💬</a>
+
+    <script>
+        // Variables globales
+        let selectedSize = null; // Talla seleccionada actualmente
+
+        // 1. Función para actualizar la etiqueta de precio mientras deslizas
+        function updatePriceLabel() {
+            const price = document.getElementById('priceRange').value;
+            document.getElementById('priceValue').innerText = price + '€';
+            filterProducts(); // Filtrar en tiempo real
+        }
+
+        // 2. Función para seleccionar talla (solo permite una a la vez)
+        function toggleSize(btn, size) {
+            // Si ya estaba seleccionada, la quitamos
+            if (btn.classList.contains('selected')) {
+                btn.classList.remove('selected');
+                selectedSize = null;
+            } else {
+                // Quitamos la clase 'selected' de todos los otros botones
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+                // La añadimos al botón pulsado
+                btn.classList.add('selected');
+                selectedSize = size;
+            }
+            filterProducts();
+        }
+
+        // 3. Función Principal de Filtrado
+        function filterProducts() {
+            // Obtener valores de los filtros
+            const maxPrice = parseInt(document.getElementById('priceRange').value);
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            
+            // Obtener categorías marcadas (checkboxes)
+            const checkedBoxes = document.querySelectorAll('.filter-category:checked');
+            const selectedCategories = Array.from(checkedBoxes).map(cb => cb.value);
+
+            // Obtener todas las tarjetas de productos
+            const products = document.querySelectorAll('.product-item');
+            let count = 0;
+
+            products.forEach(product => {
+                // Leer datos del producto (HTML data-attributes)
+                const pCategory = product.getAttribute('data-category');
+                const pPrice = parseInt(product.getAttribute('data-price'));
+                const pSizes = product.getAttribute('data-sizes').split(',');
+                const pName = product.querySelector('h3').innerText.toLowerCase();
+
+                // Lógica de coincidencia (AND logic)
+                let matchesCategory = selectedCategories.length === 0 || selectedCategories.some(cat => pCategory.includes(cat));
+                let matchesPrice = pPrice <= maxPrice;
+                let matchesSize = selectedSize === null || pSizes.includes(selectedSize);
+                let matchesSearch = searchText === '' || pName.includes(searchText);
+
+                // Mostrar u ocultar
+                if (matchesCategory && matchesPrice && matchesSize && matchesSearch) {
+                    product.style.display = 'block';
+                    count++;
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            // Actualizar texto de resultados
+            document.getElementById('resultCount').innerText = `Mostrando ${count} resultados`;
+        }
+
+        // 4. Atajos rápidos desde el menú (Marca)
+        function quickFilter(category) {
+            // Limpiar todo primero
+            clearFilters();
+            // Buscar el checkbox correspondiente y marcarlo
+            const checkbox = document.querySelector(`.filter-category[value="${category}"]`);
+            if(checkbox) {
+                checkbox.checked = true;
+                filterProducts();
+                // Bajar scroll al catálogo
+                document.getElementById('catalogo').scrollIntoView();
+            }
+        }
+
+        // 5. Borrar filtros
+        function clearFilters() {
+            document.getElementById('priceRange').value = 300;
+            document.getElementById('priceValue').innerText = '300€';
+            document.getElementById('searchInput').value = '';
+            document.querySelectorAll('.filter-category').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+            selectedSize = null;
+            filterProducts();
+        }
+
+        // Añadir evento al checkboxes para filtrar al hacer click
+        document.querySelectorAll('.filter-category').forEach(cb => {
+            cb.addEventListener('change', filterProducts);
+        });
+        
+        // Añadir evento al buscador para filtrar al escribir
+        document.getElementById('searchInput').addEventListener('keyup', filterProducts);
+
+    </script>
 </body>
 </html>
