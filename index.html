@@ -16,24 +16,23 @@
     </div>
 
     <header class="main-header">
-        <a href="#" class="logo-container">
+        <a href="#" class="logo-container" onclick="resetApp()">
             <img src="img/Logo.jpeg" alt="Logo ZAPAS.HOP" class="site-logo" onerror="this.src='https://placehold.co/150x50/000/fff?text=ZAPAS.HOP'">
         </a>
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Busca: Jordan, Dunk, Yeezy...">
-            <button onclick="filterProducts()">🔍</button>
+            <input type="text" id="searchInput" placeholder="Busca: Jordan, Dunk..." onkeypress="handleEnter(event)">
+            <button onclick="searchAndScroll()">🔍</button>
         </div>
         <div class="header-contact">
             <a href="https://wa.me/644922976" target="_blank" class="btn-whatsapp-header">
-                📱 Pedir por WhatsApp
+                📱 WhatsApp
             </a>
         </div>
     </header>
 
     <nav class="main-nav">
         <ul class="menu-list">
-            <li><a href="#" class="menu-link active">NOVEDADES</a></li>
-            <li><a href="#catalogo" class="menu-link">CATÁLOGO</a></li> 
+            <li><a href="#catalogo" onclick="resetApp()" class="menu-link">CATÁLOGO</a></li> 
             <li class="dropdown">
                 <a href="#" class="menu-link">MARCAS ▾</a>
                 <div class="dropdown-content mega-menu">
@@ -50,15 +49,15 @@
                     </div>
                 </div>
             </li>
-            <li><a href="#" class="menu-link highlight">OUTLET %</a></li>
+            <li><a href="#catalogo" onclick="filterOutletMode()" class="menu-link highlight">OUTLET %</a></li>
         </ul>
     </nav>
 
     <section class="hero">
         <div class="hero-text">
             <h1>El flow empieza<br><em>por los pies</em></h1>
-            <p class="sub-hero">Catálogo exclusivo de Sneakers. Filtra por talla, precio y marca.</p>
-            <a href="#catalogo" class="btn-cta">VER CATÁLOGO 🔥</a>
+            <p class="sub-hero">Las mejores marcas al mejor precio. Envíos rápidos.</p>
+            <a href="#catalogo" class="btn-cta">VER TODO 🔥</a>
         </div>
         <div class="hero-image-container">
             <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&q=80&w=600" alt="Zapatillas Streetwear">
@@ -67,13 +66,15 @@
 
     <section id="catalogo" class="catalog-section">
         <div class="catalog-header">
-            <h2 class="section-title">TODO EL STOCK</h2>
-            <p class="results-count" id="resultCount">Mostrando todos los productos</p>
+            <h2 class="section-title" id="sectionTitle">TODO EL STOCK</h2>
+            <p class="results-count" id="resultCount">Cargando productos...</p>
         </div>
+
+        <button class="mobile-filter-btn" onclick="toggleMobileFilters()">⚙️ Mostrar Filtros</button>
 
         <div class="catalog-container">
             
-            <aside class="filters-sidebar">
+            <aside class="filters-sidebar" id="filtersSidebar">
                 <div class="filter-group">
                     <h4>Colección / Marca</h4>
                     <label><input type="checkbox" class="filter-category" value="jordan"> Jordan Brand</label>
@@ -81,6 +82,7 @@
                     <label><input type="checkbox" class="filter-category" value="yeezy"> Yeezy</label>
                     <label><input type="checkbox" class="filter-category" value="adidas"> Adidas</label>
                     <label><input type="checkbox" class="filter-category" value="nb"> New Balance</label>
+                    <label><input type="checkbox" class="filter-category" value="nike"> Nike Air Max</label>
                 </div>
 
                 <div class="filter-group">
@@ -102,11 +104,17 @@
                     <input type="range" min="50" max="300" value="300" class="price-slider" id="priceRange" oninput="updatePriceLabel()">
                 </div>
                 
-                <button onclick="clearFilters()" style="width:100%; padding:10px; background:#ddd; border:none; cursor:pointer;">Borrar Filtros</button>
+                <button onclick="resetApp()" style="width:100%; padding:10px; background:#ddd; border:none; cursor:pointer; margin-bottom:10px;">Borrar Filtros</button>
             </aside>
 
             <div class="catalog-grid" id="productsGrid">
                 
+                <div id="noResults" class="no-results-box" style="display: none;">
+                    <h3>😔 No encontramos nada.</h3>
+                    <p>Prueba a cambiar los filtros.</p>
+                    <button onclick="resetApp()" class="btn-card" style="margin-top:10px;">Ver todo</button>
+                </div>
+
                 <div class="card product-item" data-category="dunk nike" data-price="110" data-sizes="39,40,41,42,43">
                     <div class="card-image-wrapper">
                         <img src="https://placehold.co/300x300/eee/333?text=Dunk+Panda" alt="Nike Dunk Panda">
@@ -152,7 +160,6 @@
                 <div class="card product-item" data-category="jordan nike" data-price="280" data-sizes="42,43,44,45">
                     <div class="card-image-wrapper">
                         <img src="https://placehold.co/300x300/eee/333?text=J4+Military" alt="Jordan 4">
-                        <span class="badge">HOT</span>
                     </div>
                     <div class="card-info">
                         <h3>Jordan 4 Military Black</h3>
@@ -164,16 +171,17 @@
                     </div>
                 </div>
                 
-                <div class="card product-item" data-category="adidas" data-price="99" data-sizes="38,39,40,41,42,43">
+                <div class="card product-item" data-category="adidas" data-sale="true" data-price="85" data-sizes="38,39,40,41,42,43">
                     <div class="card-image-wrapper">
                         <img src="https://placehold.co/300x300/eee/333?text=Forum+Low" alt="Adidas Forum">
+                        <span class="badge sale">-15%</span>
                     </div>
                     <div class="card-info">
                         <h3>Adidas Forum Low</h3>
                         <p class="model-ref">Ref: AD-FOR</p>
                         <div class="card-bottom">
-                            <p class="price">99,99€</p>
-                            <a href="https://wa.me/644922976?text=Interesado en Adidas Forum" class="btn-card">Pedir</a>
+                            <p class="price"><span class="old-price">100€</span> 85,00€</p>
+                            <a href="https://wa.me/644922976?text=Interesado en Adidas Forum Oferta" class="btn-card">Pedir</a>
                         </div>
                     </div>
                 </div>
@@ -192,66 +200,102 @@
                     </div>
                 </div>
 
+                <div class="card product-item" data-category="nike" data-sale="true" data-price="120" data-sizes="38,39,40">
+                    <div class="card-image-wrapper">
+                        <img src="https://placehold.co/300x300/eee/333?text=Air+Max+90" alt="Nike Air Max">
+                        <span class="badge sale">-20%</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>Nike Air Max 90</h3>
+                        <p class="model-ref">Ref: NK-AM90</p>
+                        <div class="card-bottom">
+                            <p class="price"><span class="old-price">150€</span> 120,00€</p>
+                            <a href="https://wa.me/644922976?text=Interesado en Air Max Oferta" class="btn-card">Pedir</a>
+                        </div>
+                    </div>
+                </div>
+
             </div> </div> </section>
 
     <a href="https://wa.me/644922976" class="float-whatsapp" target="_blank">💬</a>
 
     <script>
         // Variables globales
-        let selectedSize = null; // Talla seleccionada actualmente
+        let selectedSize = null;
+        let outletMode = false; // Variable para controlar si estamos en modo Outlet
 
-        // 1. Función para actualizar la etiqueta de precio mientras deslizas
+        // Inicializar
+        window.onload = filterProducts;
+
         function updatePriceLabel() {
             const price = document.getElementById('priceRange').value;
             document.getElementById('priceValue').innerText = price + '€';
-            filterProducts(); // Filtrar en tiempo real
+            filterProducts();
         }
 
-        // 2. Función para seleccionar talla (solo permite una a la vez)
         function toggleSize(btn, size) {
-            // Si ya estaba seleccionada, la quitamos
             if (btn.classList.contains('selected')) {
                 btn.classList.remove('selected');
                 selectedSize = null;
             } else {
-                // Quitamos la clase 'selected' de todos los otros botones
                 document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
-                // La añadimos al botón pulsado
                 btn.classList.add('selected');
                 selectedSize = size;
             }
             filterProducts();
         }
 
-        // 3. Función Principal de Filtrado
+        function searchAndScroll() {
+            // Al buscar, quitamos el modo outlet para buscar en todo el catálogo
+            outletMode = false;
+            updateTitle();
+            filterProducts();
+            document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleEnter(e) {
+            if(e.key === 'Enter') {
+                searchAndScroll();
+            }
+        }
+
+        function toggleMobileFilters() {
+            const sidebar = document.getElementById('filtersSidebar');
+            // Toggle de clase CSS para mostrar/ocultar en móvil
+            if (sidebar.style.display === 'block') {
+                sidebar.style.display = 'none';
+            } else {
+                sidebar.style.display = 'block';
+            }
+        }
+
+        // --- LÓGICA DE FILTRADO PRINCIPAL ---
         function filterProducts() {
-            // Obtener valores de los filtros
             const maxPrice = parseInt(document.getElementById('priceRange').value);
             const searchText = document.getElementById('searchInput').value.toLowerCase();
-            
-            // Obtener categorías marcadas (checkboxes)
             const checkedBoxes = document.querySelectorAll('.filter-category:checked');
             const selectedCategories = Array.from(checkedBoxes).map(cb => cb.value);
-
-            // Obtener todas las tarjetas de productos
+            
             const products = document.querySelectorAll('.product-item');
+            const noResultsMsg = document.getElementById('noResults');
             let count = 0;
 
             products.forEach(product => {
-                // Leer datos del producto (HTML data-attributes)
                 const pCategory = product.getAttribute('data-category');
                 const pPrice = parseInt(product.getAttribute('data-price'));
                 const pSizes = product.getAttribute('data-sizes').split(',');
                 const pName = product.querySelector('h3').innerText.toLowerCase();
+                const pSale = product.getAttribute('data-sale') === 'true'; // Comprobar si es rebaja
 
-                // Lógica de coincidencia (AND logic)
                 let matchesCategory = selectedCategories.length === 0 || selectedCategories.some(cat => pCategory.includes(cat));
                 let matchesPrice = pPrice <= maxPrice;
                 let matchesSize = selectedSize === null || pSizes.includes(selectedSize);
                 let matchesSearch = searchText === '' || pName.includes(searchText);
+                
+                // Lógica Outlet: Si outletMode está activado, el producto DEBE ser sale
+                let matchesOutlet = !outletMode || pSale; 
 
-                // Mostrar u ocultar
-                if (matchesCategory && matchesPrice && matchesSize && matchesSearch) {
+                if (matchesCategory && matchesPrice && matchesSize && matchesSearch && matchesOutlet) {
                     product.style.display = 'block';
                     count++;
                 } else {
@@ -259,43 +303,84 @@
                 }
             });
 
-            // Actualizar texto de resultados
-            document.getElementById('resultCount').innerText = `Mostrando ${count} resultados`;
+            if (count === 0) {
+                noResultsMsg.style.display = 'block';
+                document.getElementById('resultCount').innerText = `0 resultados`;
+            } else {
+                noResultsMsg.style.display = 'none';
+                document.getElementById('resultCount').innerText = `Mostrando ${count} resultados`;
+            }
         }
 
-        // 4. Atajos rápidos desde el menú (Marca)
+        // Filtro rápido para Marcas
         function quickFilter(category) {
-            // Limpiar todo primero
-            clearFilters();
-            // Buscar el checkbox correspondiente y marcarlo
+            clearFilters(false); // No reseteamos todo drásticamente
+            outletMode = false; // Salimos del outlet si filtramos por marca específica
+            updateTitle();
+            
             const checkbox = document.querySelector(`.filter-category[value="${category}"]`);
             if(checkbox) {
                 checkbox.checked = true;
                 filterProducts();
-                // Bajar scroll al catálogo
-                document.getElementById('catalogo').scrollIntoView();
+                document.getElementById('catalogo').scrollIntoView({behavior: "smooth"});
             }
         }
+        
+        // Filtro específico para OUTLET
+        function filterOutletMode() {
+            clearFilters(false); // Limpiar checkboxes
+            outletMode = true; // Activar modo outlet
+            updateTitle();
+            filterProducts();
+            document.getElementById('catalogo').scrollIntoView({behavior: "smooth"});
+        }
 
-        // 5. Borrar filtros
-        function clearFilters() {
+        function resetApp() {
+            clearFilters(true);
+            document.getElementById('catalogo').scrollIntoView({behavior: "smooth"});
+        }
+
+        function clearFilters(fullReset = true) {
+            if(fullReset) {
+                outletMode = false;
+                updateTitle();
+            }
             document.getElementById('priceRange').value = 300;
             document.getElementById('priceValue').innerText = '300€';
             document.getElementById('searchInput').value = '';
             document.querySelectorAll('.filter-category').forEach(cb => cb.checked = false);
             document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
             selectedSize = null;
+            
+            // Cerrar menú móvil si está abierto
+            if(window.innerWidth < 900) {
+                document.getElementById('filtersSidebar').style.display = 'none';
+            }
+
             filterProducts();
         }
 
-        // Añadir evento al checkboxes para filtrar al hacer click
+        function updateTitle() {
+            const title = document.getElementById('sectionTitle');
+            if(outletMode) {
+                title.innerText = "ZONA OUTLET 🔥";
+                title.style.color = "#e11d48";
+            } else {
+                title.innerText = "TODO EL STOCK";
+                title.style.color = "#111";
+            }
+        }
+
         document.querySelectorAll('.filter-category').forEach(cb => {
-            cb.addEventListener('change', filterProducts);
+            cb.addEventListener('change', () => {
+                // Si tocas categorías, mantenemos el outletMode solo si quieres, 
+                // pero lo habitual es que si filtras "Nike", quieras ver Nike rebajado o normal.
+                // En este caso, dejaremos que convivan.
+                filterProducts();
+            });
         });
         
-        // Añadir evento al buscador para filtrar al escribir
         document.getElementById('searchInput').addEventListener('keyup', filterProducts);
-
     </script>
 </body>
 </html>
